@@ -1,0 +1,6 @@
+.vagrant/
+config.rb
+config.ign
+config.ign.merged
+*.vmdk
+*.img
