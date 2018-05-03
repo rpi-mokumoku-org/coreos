@@ -140,11 +140,11 @@ Vagrant.configure("2") do |config|
 
       config.vm.network :private_network, type: "dhcp", ip: ip
       config.vm.network :public_network, type: "dhcp"
-      config.vm.network :forwarded_port, host: 80, guest: 80
-      config.vm.network :forwarded_port, host: 443, guest: 443
-      config.vm.network :forwarded_port, host: 3306, guest: 3306
-      #config.vm.network :forwarded_port, host: 50080, guest: 80
-      #config.vm.network :forwarded_port, host: 50081, guest: 50081
+      #config.vm.network :forwarded_port, host: 80, guest: 80
+      #config.vm.network :forwarded_port, host: 443, guest: 443
+      #config.vm.network :forwarded_port, host: 3306, guest: 3306
+      config.vm.network :forwarded_port, host: 53000, guest: 3000
+      config.vm.network :forwarded_port, host: 53001, guest: 3001
       config.vm.provision :shell, path: "bootstrap.sh"
 
       # Vagrant Plugins for Windows
