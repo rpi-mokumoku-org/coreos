@@ -1,5 +1,5 @@
 .vagrant/
-config.rb
+config.*
 config.ign
 config.ign.merged
 *.vmdk

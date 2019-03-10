@@ -28,7 +28,8 @@ $instance_name_prefix = "core"
 $enable_serial_logging = false
 $share_home = false
 $vm_gui = false
-$vm_memory = 1024
+#$vm_memory = 4096
+$vm_memory = 2048
 $vm_cpus = 1
 $vb_cpuexecutioncap = 100
 $shared_folders = {}
@@ -140,11 +141,11 @@ Vagrant.configure("2") do |config|
 
       config.vm.network :private_network, type: "dhcp", ip: ip
       config.vm.network :public_network, type: "dhcp"
-      #config.vm.network :forwarded_port, host: 80, guest: 80
-      #config.vm.network :forwarded_port, host: 443, guest: 443
-      #config.vm.network :forwarded_port, host: 3306, guest: 3306
-      config.vm.network :forwarded_port, host: 53000, guest: 3000
-      config.vm.network :forwarded_port, host: 53001, guest: 3001
+      config.vm.network :forwarded_port, host: 80, guest: 80
+      config.vm.network :forwarded_port, host: 443, guest: 443
+      config.vm.network :forwarded_port, host: 3306, guest: 3306
+      config.vm.network :forwarded_port, host: 3000, guest: 3000
+      #config.vm.network :forwarded_port, host: 53001, guest: 3001
       config.vm.provision :shell, path: "bootstrap.sh"
 
       # Vagrant Plugins for Windows
@@ -157,7 +158,8 @@ Vagrant.configure("2") do |config|
       config.ignition.ip = ip
 
       # Uncomment below to enable NFS for sharing the host machine into the coreos-vagrant VM.
-      config.vm.synced_folder "../share", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+      # config.vm.synced_folder "../share", "/home/core/share", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+      config.vm.synced_folder "../share", "/home/core/share", id: "core", :mount_options => ['nolock,vers=3,udp']
 
       $shared_folders.each_with_index do |(host_folder, guest_folder), index|
         config.vm.synced_folder host_folder.to_s, guest_folder.to_s, id: "core-share%02d" % index, nfs: true, mount_options: ['nolock,vers=3,udp']
